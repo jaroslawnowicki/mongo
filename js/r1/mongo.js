@@ -2,7 +2,7 @@
  * Created by jarek on 04.06.17.
  */
 db.posts.find({'tags': 'politics', 'vote_count': {'$gt': 10}});
-use test;
+use test
 //switched to db test
 db.users.insert({name: "Kyle"})
 //WriteResult({ "nInserted" : 1 })
