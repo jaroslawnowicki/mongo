@@ -1,0 +1,41 @@
+version: "2"
+services:
+  mongorep1:
+    image: mongo:latest
+    container_name: "mongorep1"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ${HOME}/docker/mongo/mongorep1/data/:/data/db
+    ports:
+      - 27017:27017
+    hostname: 192.168.0.20
+    command: mongod --replSet mon --smallfiles --logpath=/dev/null 
+
+
+  mongorep2:
+    image: mongo:latest
+    container_name: "mongorep2"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ${HOME}/docker/mongo/mongorep2/data/:/data/db
+    ports:
+      - 27018:27017
+    hostname: 192.168.0.20
+    command: mongod --replSet mon --smallfiles --logpath=/dev/null
+
+  arbiter:
+    image: mongo:latest
+    container_name: "arbiter"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ${HOME}/docker/mongo/arbiter/data/:/data/db
+    ports:
+      - 27019:27017
+    hostname: 192.168.0.20
+    command: mongod --replSet mon --smallfiles --logpath=/dev/null
